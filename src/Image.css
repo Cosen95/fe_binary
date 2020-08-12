@@ -1,0 +1,7 @@
+.container {
+  width: 800px;
+}
+.row {
+  display: flex;
+  justify-content: space-around;
+}
