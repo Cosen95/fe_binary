@@ -80,6 +80,22 @@ export default class Image extends React.Component {
       startDrag: false,
     });
   };
+  upload = (event) => {
+    // console.log("文件url", this.state.avatarDataUrl);
+    let bytes = atob(this.state.avatarDataUrl.split(",")[1]);
+    console.log("bytes", bytes);
+    let arrayBuffer = new ArrayBuffer(bytes.length);
+    let uInt8Array = new Uint8Array();
+    for (let i = 0; i < bytes.length; i++) {
+      uInt8Array[i] = bytes.charCodeAt[i];
+    }
+    let blob = new Blob([arrayBuffer], { type: "image/png" });
+    let xhr = new XMLHttpRequest();
+    let formData = new FormData();
+    formData.append("avatar", blob);
+    xhr.open("POST", "/upload", true);
+    xhr.send(formData);
+  };
   drawImage = (left = this.state.lastX, top = this.state.lastY) => {
     let image = this.imageRef.current;
     let canvas = this.canvasRef.current;
@@ -108,6 +124,9 @@ export default class Image extends React.Component {
   render() {
     return (
       <div className={styles.container}>
+        <h2 style={{ color: "#79D281", marginLeft: "300px" }}>
+          图片裁剪、预览及上传
+        </h2>
         <div className={styles.row}>
           <div>
             <input type="file" accept="image/*" onChange={this.handleChange} />
@@ -120,7 +139,7 @@ export default class Image extends React.Component {
                 src={this.state.dataURL}
                 alt=""
                 ref={this.imageRef}
-                style={{ border: "2px dashed green " }}
+                style={{ border: "2px dashed #79D281", width: "400px" }}
               />
             )}
           </div>
@@ -137,7 +156,7 @@ export default class Image extends React.Component {
                     ref={this.canvasRef}
                     width="300px"
                     height="300px"
-                    style={{ border: "2px dashed blue" }}
+                    style={{ border: "2px dashed #632B21" }}
                   ></canvas>
                   <div
                     style={{
@@ -181,9 +200,22 @@ export default class Image extends React.Component {
             {this.state.file && (
               <img
                 ref={this.avatarRef}
-                style={{ border: "2px solid pink" }}
+                style={{ border: "2px solid #85D6C7" }}
                 alt=""
               />
+            )}
+          </div>
+          <div>
+            {this.state.file && (
+              <div className="btn-group">
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={this.upload}
+                >
+                  上传
+                </button>
+              </div>
             )}
           </div>
         </div>
