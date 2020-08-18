@@ -284,7 +284,7 @@ console.log(dataURL);
 先来看下最终的效果：
 ![图片裁剪上传](https://user-images.githubusercontent.com/26785201/90368546-c9992b80-e09c-11ea-868b-026bbc7729f0.gif)
 
-这里贴下完成后的[代码地址]()
+这里贴下完成后的[代码地址](https://github.com/Jack-cool/fe_binary)
 
 另外，我用一张图梳理了以上提到的前端二进制模块的关系，这对于下面需求的开发会有很大的帮助：
 ![前端二进制体系](https://user-images.githubusercontent.com/26785201/90368646-f8170680-e09c-11ea-9ba9-d2920f65c54e.png)
